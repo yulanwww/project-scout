@@ -1,0 +1,317 @@
+{
+  "status": "design_only_not_registered",
+  "implementation": "github_library.LibraryService",
+  "repository": "owner/private-library",
+  "branch": "main",
+  "approval_policy": "先 review_project 生成预览与摘要，展示评审后由可信会话核实人类明确确认，再允许写入。摘要不是认证。",
+  "tools": [
+    {
+      "name": "save_project",
+      "description": "明确确认后新增已评审项目，重复不覆盖。",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "project": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "category",
+              "url",
+              "usefulness",
+              "examples",
+              "limitations",
+              "recommendation"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}$"
+              },
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "github_url": {
+                "type": "string"
+              },
+              "source_url": {
+                "type": "string"
+              },
+              "pricing": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string",
+                "format": "date"
+              },
+              "updated": {
+                "type": "string",
+                "format": "date"
+              },
+              "usefulness": {
+                "type": "string"
+              },
+              "recommendation": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "github",
+                  "website",
+                  "diy"
+                ]
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 30
+              },
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 3,
+                "maxItems": 4
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "references": {
+                "type": "array",
+                "maxItems": 12,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "title",
+                    "url"
+                  ],
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "review_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "confirmation": {
+            "type": "string",
+            "const": "确认收藏",
+            "description": "仅由可信适配器在核实人类明确确认后传入；模型填写常量不是授权证明。"
+          }
+        },
+        "required": [
+          "project",
+          "review_digest",
+          "confirmation"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "search_projects",
+      "description": "只读搜索私人收藏，返回属性、路径和revision。",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "type": "string",
+            "default": ""
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "",
+              "github",
+              "website",
+              "diy"
+            ],
+            "default": ""
+          }
+        },
+        "required": []
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "update_project",
+      "description": "明确确认修改后检查旧版本并更新，冲突不覆盖。",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "project": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "category",
+              "url",
+              "usefulness",
+              "examples",
+              "limitations",
+              "recommendation"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}$"
+              },
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "github_url": {
+                "type": "string"
+              },
+              "source_url": {
+                "type": "string"
+              },
+              "pricing": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "created": {
+                "type": "string",
+                "format": "date"
+              },
+              "updated": {
+                "type": "string",
+                "format": "date"
+              },
+              "usefulness": {
+                "type": "string"
+              },
+              "recommendation": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "github",
+                  "website",
+                  "diy"
+                ]
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 30
+              },
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 3,
+                "maxItems": 4
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "references": {
+                "type": "array",
+                "maxItems": 12,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "title",
+                    "url"
+                  ],
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "review_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "confirmation": {
+            "type": "string",
+            "const": "确认收藏",
+            "description": "仅由可信适配器在核实人类明确确认后传入；模型填写常量不是授权证明。"
+          },
+          "expected_revision": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          }
+        },
+        "required": [
+          "project",
+          "review_digest",
+          "confirmation",
+          "expected_revision"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "openWorldHint": true
+      }
+    }
+  ],
+  "results": [
+    "created",
+    "updated",
+    "existing",
+    "duplicate"
+  ],
+  "failure": "LibraryError/UploadPending 非零退出；failed_or_unknown 不得声称成功。"
+}

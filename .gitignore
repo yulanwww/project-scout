@@ -1,0 +1,32 @@
+# Python environments and generated files
+.venv*/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Local application data, state, and configuration
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.local/
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# User vaults, runtime installs, caches, and temporary test files
+Vault/
+.obsidian/
+.tools/
+work/
+Attachments/*
+!Attachments/.gitkeep
+
+# Local logs and platform files
+*.log
+Thumbs.db
+.DS_Store

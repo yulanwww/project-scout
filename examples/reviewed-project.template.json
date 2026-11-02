@@ -1,0 +1,30 @@
+{
+  "id": "ps-example-only",
+  "title": "Example project (replace before use)",
+  "category": "website",
+  "url": "https://example.com/project",
+  "source_url": "",
+  "github_url": "",
+  "tags": ["example"],
+  "pricing": "Not verified",
+  "status": "want-to-try",
+  "created": "2026-01-01",
+  "updated": "2026-01-01",
+  "usefulness": "Replace this placeholder with a verified explanation of the project's purpose, workflow, and practical value.",
+  "examples": [
+    "Describe a concrete task and expected result.",
+    "Describe another concrete task and expected result.",
+    "Describe a third concrete task and expected result."
+  ],
+  "limitations": [
+    "Replace with a verified limitation.",
+    "Replace with another verified limitation."
+  ],
+  "recommendation": "Maybe: replace this placeholder with a short, evidence-based reason.",
+  "references": [
+    {
+      "title": "Example source",
+      "url": "https://example.com/project"
+    }
+  ]
+}

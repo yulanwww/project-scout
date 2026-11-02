@@ -1,0 +1,70 @@
+filters:
+  and:
+    - file.ext == "md"
+    - note.id != null
+    - or:
+        - file.inFolder("GitHub-Projects")
+        - file.inFolder("Websites")
+        - file.inFolder("DIY-Projects")
+properties:
+  title:
+    displayName: Project
+  category:
+    displayName: Category
+  status:
+    displayName: Status
+  pricing:
+    displayName: Pricing
+  tags:
+    displayName: Tags
+  updated:
+    displayName: Updated
+views:
+  - type: cards
+    name: All collections
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC
+  - type: cards
+    name: GitHub Projects
+    filters: note.category == "github"
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC
+  - type: cards
+    name: Websites
+    filters: note.category == "website"
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC
+  - type: cards
+    name: DIY Projects
+    filters: note.category == "diy"
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC
+  - type: cards
+    name: Want to try
+    filters: note.status == "collected" || note.status == "want-to-try"
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC
+  - type: cards
+    name: Tried
+    filters: note.status == "tried"
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC
+  - type: cards
+    name: Completed
+    filters: note.status == "done"
+    order: [title, category, status, pricing, tags, updated]
+    sort:
+      - property: updated
+        direction: DESC

@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Example Tool (replace before importing)",
+    "description": "Placeholder example; replace with verified information.",
+    "purpose": "Demonstrate the local JSON import format.",
+    "usage": "Open the website and follow its official getting-started guide.",
+    "website": "https://example.com",
+    "github": "",
+    "source_url": "",
+    "price": "Not verified",
+    "category": "Example",
+    "tags": ["example"],
+    "collected_date": "2026-01-01"
+  }
+]
